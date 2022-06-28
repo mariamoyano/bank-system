@@ -2,43 +2,33 @@ package com.ironhack.midtermmariamoyano.models;
 
 import com.ironhack.midtermmariamoyano.enums.Status;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Checking extends Account {
 
-    private BigDecimal balance;
     private String secretKey;
-    private String primaryOwner;
-    private String secondOwner;
     private BigDecimal minimumBalance;
-    private BigDecimal penaltyFee;
     private BigDecimal monthlyMaintenanceFee;
     private Date creationDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
-    public Checking(BigDecimal balance, String primaryOwner, String secondOwner, BigDecimal penaltyFee, BigDecimal balance1, String secretKey, String primaryOwner1, String secondOwner1, BigDecimal minimumBalance, BigDecimal penaltyFee1, BigDecimal monthlyMaintenanceFee, Date creationDate, Status status) {
-        super(balance, primaryOwner, secondOwner, penaltyFee);
-        this.balance = balance1;
+    public Checking() {
+    }
+
+    public Checking(long id,BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, Date creationDate, Status status) {
+        super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
-        this.primaryOwner = primaryOwner1;
-        this.secondOwner = secondOwner1;
         this.minimumBalance = minimumBalance;
-        this.penaltyFee = penaltyFee1;
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.creationDate = creationDate;
         this.status = status;
     }
 
-    @Override
-    public BigDecimal getBalance() {
-        return balance;
-    }
 
-    @Override
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
 
     public String getSecretKey() {
         return secretKey;
@@ -48,25 +38,7 @@ public class Checking extends Account {
         this.secretKey = secretKey;
     }
 
-    @Override
-    public String getPrimaryOwner() {
-        return primaryOwner;
-    }
 
-    @Override
-    public void setPrimaryOwner(String primaryOwner) {
-        this.primaryOwner = primaryOwner;
-    }
-
-    @Override
-    public String getSecondOwner() {
-        return secondOwner;
-    }
-
-    @Override
-    public void setSecondOwner(String secondOwner) {
-        this.secondOwner = secondOwner;
-    }
 
     public BigDecimal getMinimumBalance() {
         return minimumBalance;
@@ -76,15 +48,6 @@ public class Checking extends Account {
         this.minimumBalance = minimumBalance;
     }
 
-    @Override
-    public BigDecimal getPenaltyFee() {
-        return penaltyFee;
-    }
-
-    @Override
-    public void setPenaltyFee(BigDecimal penaltyFee) {
-        this.penaltyFee = penaltyFee;
-    }
 
     public BigDecimal getMonthlyMaintenanceFee() {
         return monthlyMaintenanceFee;
