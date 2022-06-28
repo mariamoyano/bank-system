@@ -1,5 +1,6 @@
 package com.ironhack.midtermmariamoyano.models;
 
+import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 
 import javax.persistence.*;
@@ -10,8 +11,19 @@ import java.util.Date;
 public class Checking extends Account {
 
     private String secretKey;
-    private BigDecimal minimumBalance;
-    private BigDecimal monthlyMaintenanceFee;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "minimun_balance_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "minimun_balance_currency"))
+            })
+    private Money minimumBalance;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "monthly_maintenance_fee_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "monthly_maintenance_fee_currency"))
+    })
+    private Money monthlyMaintenanceFee;
     private Date creationDate;
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -19,7 +31,7 @@ public class Checking extends Account {
     public Checking() {
     }
 
-    public Checking(long id,BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee, Date creationDate, Status status) {
+    public Checking(long id, BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
         super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         this.minimumBalance = minimumBalance;
@@ -40,20 +52,20 @@ public class Checking extends Account {
 
 
 
-    public BigDecimal getMinimumBalance() {
+    public Money getMinimumBalance() {
         return minimumBalance;
     }
 
-    public void setMinimumBalance(BigDecimal minimumBalance) {
+    public void setMinimumBalance(Money minimumBalance) {
         this.minimumBalance = minimumBalance;
     }
 
 
-    public BigDecimal getMonthlyMaintenanceFee() {
+    public Money getMonthlyMaintenanceFee() {
         return monthlyMaintenanceFee;
     }
 
-    public void setMonthlyMaintenanceFee(BigDecimal monthlyMaintenanceFee) {
+    public void setMonthlyMaintenanceFee(Money monthlyMaintenanceFee) {
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
     }
 

@@ -1,10 +1,13 @@
 package com.ironhack.midtermmariamoyano.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class Admin {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "name")
     private String name;
 
     public Admin() {
