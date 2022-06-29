@@ -14,8 +14,8 @@ public class Checking extends Account {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "minimun_balance_amount")),
-            @AttributeOverride(name = "currency", column = @Column(name = "minimun_balance_currency"))
+            @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "minimum_balance_currency"))
             })
     private Money minimumBalance;
     @Embedded

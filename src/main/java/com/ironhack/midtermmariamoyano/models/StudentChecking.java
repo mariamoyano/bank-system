@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class StudentChecking extends Account{
+public class StudentChecking extends User{
 
     private String secretKey;
     private Date creationDate;
@@ -18,13 +18,7 @@ public class StudentChecking extends Account{
 
     }
 
-    public StudentChecking(long id, BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, Date creationDate, Status status) {
-        super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
 
-        this.secretKey = secretKey;
-        this.creationDate = creationDate;
-        this.status = status;
-    }
 
 
     public String getSecretKey() {

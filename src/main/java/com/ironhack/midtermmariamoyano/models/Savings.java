@@ -1,5 +1,6 @@
 package com.ironhack.midtermmariamoyano.models;
 
+import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 
 import javax.persistence.*;
@@ -11,7 +12,12 @@ public class Savings extends Account{
 
     private String secretKey;
 
-    private BigDecimal minimumBalance;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "minimum_balance_currency"))
+    })
+    private Money minimumBalance;
 
     private Date creationDate;
     @Enumerated(EnumType.STRING)
@@ -22,7 +28,7 @@ public class Savings extends Account{
 
     }
 
-    public Savings(long id,BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, BigDecimal minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
+    public Savings(long id,BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
         super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         this.minimumBalance = minimumBalance;
@@ -40,11 +46,11 @@ public class Savings extends Account{
         this.secretKey = secretKey;
     }
 
-    public BigDecimal getMinimumBalance() {
+    public Money getMinimumBalance() {
         return minimumBalance;
     }
 
-    public void setMinimumBalance(BigDecimal minimumBalance) {
+    public void setMinimumBalance(Money minimumBalance) {
         this.minimumBalance = minimumBalance;
     }
 

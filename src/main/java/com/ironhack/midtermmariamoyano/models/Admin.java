@@ -3,17 +3,16 @@ package com.ironhack.midtermmariamoyano.models;
 import javax.persistence.*;
 
 @Entity
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "name")
+@PrimaryKeyJoinColumn(name = "id")
+public class Admin extends User {
+
     private String name;
 
     public Admin() {
     }
 
-    public Admin(String name) {
+    public Admin(String username, String password, String name) {
+        super(username, password);
         this.name = name;
     }
 

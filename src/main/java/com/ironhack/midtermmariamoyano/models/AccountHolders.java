@@ -2,41 +2,51 @@ package com.ironhack.midtermmariamoyano.models;
 
 import com.ironhack.midtermmariamoyano.classes.Address;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
-
-public class AccountHolders extends Admin{
-
-
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
+public class AccountHolders extends User{
+    private String name;
+    @Column(name="date_of_birth")
     private Date date;
 
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
-            @AttributeOverride(name = "street", column = @Column(name = "shipping_street")),
-            @AttributeOverride(name = "postalCode", column = @Column(name = "shipping_postal_code"))
+            @AttributeOverride(name = "city", column = @Column(name = "primary_city")),
+            @AttributeOverride(name = "street", column = @Column(name = "primary_street")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "primary_postal_code"))
+
     })
+    @NotNull
     private Address address;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
-            @AttributeOverride(name = "street", column = @Column(name = "billing_street")),
-            @AttributeOverride(name = "postalCode", column = @Column(name = "billing_postal_code"))
+            @AttributeOverride(name = "city", column = @Column(name = "mailing_city")),
+            @AttributeOverride(name = "street", column = @Column(name = "mailing_street")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "mailing_postal_code"))
     })
     private Address mailingAddress; //Optional
     public AccountHolders() {
     }
 
-    public AccountHolders(String name, Date date, Address address, Address mailingAddress) {
-        super(name);
+    public AccountHolders(String username, String password, String name, Date date, Address address, Address mailingAddress) {
+        super(username, password);
+        this.name = name;
         this.date = date;
         this.address = address;
         this.mailingAddress = mailingAddress;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getDate() {
