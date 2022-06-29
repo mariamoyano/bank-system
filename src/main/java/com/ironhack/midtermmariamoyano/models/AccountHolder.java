@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class AccountHolders extends User{
+public class AccountHolder extends User{
     private String name;
     @Column(name="date_of_birth")
     private Date date;
@@ -30,10 +30,10 @@ public class AccountHolders extends User{
             @AttributeOverride(name = "postalCode", column = @Column(name = "mailing_postal_code"))
     })
     private Address mailingAddress; //Optional
-    public AccountHolders() {
+    public AccountHolder() {
     }
 
-    public AccountHolders(String username, String password, String name, Date date, Address address, Address mailingAddress) {
+    public AccountHolder(String username, String password, String name, Date date, Address address, Address mailingAddress) {
         super(username, password);
         this.name = name;
         this.date = date;
