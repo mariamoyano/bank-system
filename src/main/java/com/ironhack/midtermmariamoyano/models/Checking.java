@@ -4,6 +4,7 @@ import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.Date;
 @Entity
@@ -17,24 +18,27 @@ public class Checking extends Account {
             @AttributeOverride(name = "amount", column = @Column(name = "minimum_balance_amount")),
             @AttributeOverride(name = "currency", column = @Column(name = "minimum_balance_currency"))
             })
-    private Money minimumBalance;
+    private Money minimumBalance = new Money(new BigDecimal("250"));;
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "monthly_maintenance_fee_amount")),
             @AttributeOverride(name = "currency", column = @Column(name = "monthly_maintenance_fee_currency"))
     })
-    private Money monthlyMaintenanceFee;
+    @DecimalMin(value = "12", inclusive = true)
+    private Money monthlyMaintenanceFee=new Money(new BigDecimal("12"));;
     private Date creationDate;
     @Enumerated(EnumType.STRING)
     private Status status;
 
+
     public Checking() {
     }
 
-    public Checking(long id, BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
-        super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
+    public Checking( long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
+        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
-        this.minimumBalance = minimumBalance;
+        setMinimumBalance(minimumBalance);
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.creationDate = creationDate;
         this.status = status;
@@ -57,7 +61,14 @@ public class Checking extends Account {
     }
 
     public void setMinimumBalance(Money minimumBalance) {
-        this.minimumBalance = minimumBalance;
+        BigDecimal minimumAmount= new BigDecimal(250);
+        if(minimumBalance.getAmount().compareTo(minimumAmount) == -1){
+            BigDecimal newBalance = getBalance().decreaseAmount(new BigDecimal(40));
+            setBalance(new Money(newBalance));
+            this.minimumBalance= new Money(minimumAmount);
+        }else {
+            this.minimumBalance=minimumBalance;
+        }
     }
 
 

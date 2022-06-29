@@ -2,10 +2,10 @@ DROP SCHEMA IF EXISTS midterm;
 CREATE SCHEMA midterm;
 USE midterm;
 
-DROP TABLE IF EXISTS student_checking;
-DROP TABLE IF EXISTS checking;
-DROP TABLE IF EXISTS savings;
-DROP TABLE IF EXISTS credit_card;
+--DROP TABLE IF EXISTS student_checking;
+--DROP TABLE IF EXISTS checking;
+--DROP TABLE IF EXISTS savings;
+--DROP TABLE IF EXISTS credit_card;
 
 
 CREATE TABLE account (

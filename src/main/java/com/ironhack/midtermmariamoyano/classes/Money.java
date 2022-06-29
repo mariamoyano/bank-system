@@ -35,6 +35,7 @@ public Money(BigDecimal amount, Currency currency) {
  * Class constructor specifying amount. Uses default RoundingMode HALF_EVEN and default currency USD.
  **/
 public Money(BigDecimal amount) {
+
         this(amount, USD, DEFAULT_ROUNDING);
         }
 
@@ -51,6 +52,7 @@ public BigDecimal increaseAmount(BigDecimal addAmount) {
 public BigDecimal decreaseAmount(Money money) {
         setAmount(this.amount.subtract(money.getAmount()));
         return this.amount;
+
         }
 
 public BigDecimal decreaseAmount(BigDecimal addAmount) {

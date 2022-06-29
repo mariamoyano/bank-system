@@ -1,20 +1,32 @@
 package com.ironhack.midtermmariamoyano.models;
+import com.ironhack.midtermmariamoyano.classes.Money;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class CreditCard extends Account{
 
-    private BigDecimal penaltyFee;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "credit_limit_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "credit_limit_currency"))
+    })
+    @DecimalMin(value = "100", inclusive = true)
+    @DecimalMax(value = "100000", inclusive = true)
+    private Money creditLimit = new Money(new BigDecimal("100"));;
 
-    private BigDecimal creditLimit;
-    private BigDecimal interestRate;
+    @DecimalMin(value = "0.1", inclusive = true)
+    private BigDecimal interestRate=new BigDecimal("0.2");
 
     public CreditCard() {
     }
 
-    public CreditCard(long id, BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee, BigDecimal creditLimit, BigDecimal interestRate) {
+    public CreditCard(long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
         super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
 
         this.creditLimit = creditLimit;
@@ -22,21 +34,11 @@ public class CreditCard extends Account{
     }
 
 
-    @Override
-    public BigDecimal getPenaltyFee() {
-        return penaltyFee;
-    }
-
-    @Override
-    public void setPenaltyFee(BigDecimal penaltyFee) {
-        this.penaltyFee = penaltyFee;
-    }
-
-    public BigDecimal getCreditLimit() {
+    public Money getCreditLimit() {
         return creditLimit;
     }
 
-    public void setCreditLimit(BigDecimal creditLimit) {
+    public void setCreditLimit(Money creditLimit) {
         this.creditLimit = creditLimit;
     }
 

@@ -1,33 +1,46 @@
 package com.ironhack.midtermmariamoyano.models;
 
+import com.ironhack.midtermmariamoyano.classes.Money;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account {
     @Id
-    private long id;
-    private BigDecimal balance;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "balance_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "balance_currency"))
+    })
+    private Money balance;
     private String primaryOwner;
     private String secondaryOwner;
-    private BigDecimal penaltyFee;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "penalty_fee_amount")),
+            @AttributeOverride(name = "currency", column = @Column(name = "penalty_fee_currency"))
+    })
+    private final Money penaltyFee = new Money(new BigDecimal("40"));
 
     public Account() {
     }
 
-    public Account(long id, BigDecimal balance, String primaryOwner, String secondaryOwner, BigDecimal penaltyFee) {
+    public Account(long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee) {
         this.id = id;
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
-        this.penaltyFee = penaltyFee;
+
     }
 
-    public BigDecimal getBalance() {
+    public Money getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(Money balance) {
         this.balance = balance;
     }
 
@@ -47,11 +60,10 @@ public abstract class Account {
         this.secondaryOwner = secondaryOwner;
     }
 
-    public BigDecimal getPenaltyFee() {
+    public Money getPenaltyFee() {
         return penaltyFee;
     }
 
-    public void setPenaltyFee(BigDecimal penaltyFee) {
-        this.penaltyFee = penaltyFee;
-    }
+
+
 }

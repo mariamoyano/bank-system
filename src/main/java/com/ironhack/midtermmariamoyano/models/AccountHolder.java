@@ -8,6 +8,7 @@ import java.sql.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class AccountHolder extends User{
+
     private String name;
     @Column(name="date_of_birth")
     private Date date;
