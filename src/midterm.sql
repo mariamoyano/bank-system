@@ -2,83 +2,10 @@ DROP SCHEMA IF EXISTS midterm;
 CREATE SCHEMA midterm;
 USE midterm;
 
---DROP TABLE IF EXISTS student_checking;
---DROP TABLE IF EXISTS checking;
---DROP TABLE IF EXISTS savings;
---DROP TABLE IF EXISTS credit_card;
-
-
-CREATE TABLE account (
-id BIGINT NOT NULL AUTO_INCREMENT,
-balance DECIMAL,
-primary_owner VARCHAR (255),
-secondary_owner VARCHAR (255),
-penalty_fee DECIMAL,
-PRIMARY KEY (id)
-);
-CREATE TABLE checking (
-id BIGINT NOT NULL,
-balance DECIMAL,
-secret_key VARCHAR (255),
-primary_owner VARCHAR (255),
-secondary_owner VARCHAR (255),
-minimum_balance DECIMAL,
-penalty_fee DECIMAL,
-monthly_maintenance_fee DECIMAL,
-creation_date DATE,
-
-monthly_maintenance_Fee_amount DECIMAL,
-monthly_maintenance_Fee_currency VARCHAR (255),
-minimum_balance_amount DECIMAL,
-minimum_balance_currency VARCHAR (255),
-status VARCHAR(6),
-account_id BIGINT,
-FOREIGN KEY (account_id) REFERENCES account (id)
-);
-
-CREATE TABLE student_checking (
-id BIGINT NOT NULL ,
-balance DECIMAL,
-secret_key VARCHAR (255),
-primary_owner VARCHAR (255),
-secondary_owner VARCHAR (255),
-penalty_fee DECIMAL,
-creation_date DATE,
-status VARCHAR(6),
-account_id BIGINT,
-FOREIGN KEY (account_id) REFERENCES account (id)
-);
-
-
-CREATE TABLE savings (
-id BIGINT NOT NULL,
-balance DECIMAL,
-secret_key VARCHAR (255),
-primary_owner VARCHAR (255),
-secondary_owner VARCHAR (255),
-minimum_balance DECIMAL,
-minimum_balance_amount DECIMAL,
-minimum_balance_currency VARCHAR (255),
-penalty_fee DECIMAL,
-creation_date DATE,
-interest_rate DECIMAL,
-status VARCHAR(6),
-account_id BIGINT,
-FOREIGN KEY (account_id) REFERENCES account (id)
-);
-
-CREATE TABLE credit_card (
-id BIGINT NOT NULL,
-balance DECIMAL,
-primary_owner VARCHAR (255),
-secondary_owner VARCHAR (255),
-credit_limit DECIMAL,
-interest_rate DECIMAL,
-penalty_fee DECIMAL,
-account_id BIGINT,
-FOREIGN KEY (account_id) REFERENCES account (id)
-);
-
+DROP TABLE IF EXISTS student_checking;
+DROP TABLE IF EXISTS checking;
+DROP TABLE IF EXISTS savings;
+DROP TABLE IF EXISTS credit_card;
 
 -- USUARIOS
 
@@ -94,8 +21,8 @@ CREATE TABLE role (
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
-CREATE TABLE account_holders(
-	id BIGINT NOT NULL,
+CREATE TABLE account_holder(
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255),
     date_of_birth DATE,
 --  --    primary_address VARCHAR(255),
@@ -111,18 +38,90 @@ CREATE TABLE account_holders(
 
 );
 CREATE TABLE admin(
-	id BIGINT NOT NULL,
+	id BIGINT NOT NULL ,
 	name VARCHAR(255),
     user_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+-- THIRD-PARTY
 CREATE TABLE third_party(
-	id BIGINT NOT NULL,
+	id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	name VARCHAR(255),
     hashed_key VARCHAR(255),
-    user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES user (id)
+    user_id BIGINT
+
+-- ADDRESS
+CREATE TABLE address(
+	id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    street VARCHAR (255),
+    city VARCHAR (255),
+    postalCode INT
+);
+
    );
+CREATE TABLE account (
+id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+-- balance DECIMAL,
+balance_amount DECIMAL,
+balance_currency VARCHAR (255),
+primary_owner_id BIGINT,
+secondary_owner_id BIGINT,
+-- penalty_fee DECIMAL,
+penalty_fee_amount DECIMAL,
+penalty_fee_currency VARCHAR (255),
+FOREIGN KEY (primary_owner_id) REFERENCES account_holder (id),
+FOREIGN KEY (secondary_owner_id) REFERENCES account_holder (id)
+);
+CREATE TABLE checking (
+id BIGINT NOT NULL,
+secret_key VARCHAR(255),
+-- minimum_balance DECIMAL,
+-- monthly_maintenance_fee DECIMAL,
+monthly_maintenance_Fee_amount DECIMAL,
+monthly_maintenance_Fee_currency VARCHAR (255),
+minimum_balance_amount DECIMAL,
+minimum_balance_currency VARCHAR (255),
+creation_date DATE,
+status VARCHAR(6),
+account_id BIGINT,
+FOREIGN KEY (account_id) REFERENCES account (id)
+);
+
+CREATE TABLE student_checking (
+id BIGINT NOT NULL ,
+secret_key VARCHAR (255),
+creation_date DATE,
+status VARCHAR(6),
+account_id BIGINT,
+FOREIGN KEY (account_id) REFERENCES account (id)
+);
+
+
+CREATE TABLE savings (
+id BIGINT NOT NULL,
+secret_key VARCHAR (255),
+-- minimum_balance DECIMAL,
+minimum_balance_amount DECIMAL,
+minimum_balance_currency VARCHAR (255),
+creation_date DATE,
+interest_rate DECIMAL,
+status VARCHAR(6),
+account_id BIGINT,
+FOREIGN KEY (account_id) REFERENCES account (id)
+);
+
+CREATE TABLE credit_card (
+id BIGINT NOT NULL,
+-- credit_limit DECIMAL,
+credit_limit_amount DECIMAL,
+credit_limit_currency VARCHAR (255),
+interest_rate DECIMAL,
+account_id BIGINT,
+FOREIGN KEY (account_id) REFERENCES account (id)
+);
+
+
 
 
 

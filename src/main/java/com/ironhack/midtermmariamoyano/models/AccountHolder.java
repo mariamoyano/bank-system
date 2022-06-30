@@ -5,6 +5,7 @@ import com.ironhack.midtermmariamoyano.classes.Address;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class AccountHolder extends User{

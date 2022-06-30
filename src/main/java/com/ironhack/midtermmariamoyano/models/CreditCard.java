@@ -16,9 +16,8 @@ public class CreditCard extends Account{
             @AttributeOverride(name = "amount", column = @Column(name = "credit_limit_amount")),
             @AttributeOverride(name = "currency", column = @Column(name = "credit_limit_currency"))
     })
-    @DecimalMin(value = "100", inclusive = true)
-    @DecimalMax(value = "100000", inclusive = true)
-    private Money creditLimit = new Money(new BigDecimal("100"));;
+
+    private Money creditLimit = new Money(new BigDecimal("100"));
 
     @DecimalMin(value = "0.1", inclusive = true)
     private BigDecimal interestRate=new BigDecimal("0.2");
@@ -26,7 +25,7 @@ public class CreditCard extends Account{
     public CreditCard() {
     }
 
-    public CreditCard(long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
+    public CreditCard(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
         super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
 
         this.creditLimit = creditLimit;
@@ -39,8 +38,21 @@ public class CreditCard extends Account{
     }
 
     public void setCreditLimit(Money creditLimit) {
-        this.creditLimit = creditLimit;
+
+        BigDecimal minCreditLimit = new BigDecimal(100);
+        BigDecimal maxCreditLimit = new BigDecimal(100000);
+//        if(creditLimit.getAmount().compareTo(minCreditLimit) == -1){
+//            BigDecimal newBalance = getBalance().decreaseAmount(new BigDecimal(40));
+//            setBalance(new Money(newBalance));
+
+        if ((creditLimit.getAmount().compareTo(minCreditLimit) == 1 && creditLimit.getAmount().compareTo(maxCreditLimit) == -1)
+                || creditLimit.getAmount().compareTo(minCreditLimit) == 0 || creditLimit.getAmount().compareTo(maxCreditLimit) == -1) {
+            this.creditLimit = creditLimit;
+        } else {
+            this.creditLimit = new Money(new BigDecimal("100"));
+        }
     }
+
 
     public BigDecimal getInterestRate() {
         return interestRate;

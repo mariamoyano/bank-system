@@ -2,6 +2,8 @@ package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.controllers.interfaces.CheckingControllerInterface;
+import com.ironhack.midtermmariamoyano.models.Account;
+import com.ironhack.midtermmariamoyano.models.Checking;
 import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
 import com.ironhack.midtermmariamoyano.security.CustomUserDetails;
 import com.ironhack.midtermmariamoyano.services.interfaces.CheckingService;
@@ -11,6 +13,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+
 @RestController
 public class CheckingControllerImpl implements CheckingControllerInterface {
 
@@ -31,5 +38,15 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
     public void update(@PathVariable long id, @RequestBody @Valid Money balance) {
         checkingService.updateBalance(id, balance);
     }
+
+    //Create a new Checking account
+    @PostMapping("/checkings")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void storeAccount(@RequestBody @Valid Checking checking) {
+
+        checkingService.createCheckingAccount(checking);
+
+    }
+
 
 }

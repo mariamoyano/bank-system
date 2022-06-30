@@ -1,5 +1,6 @@
 package com.ironhack.midtermmariamoyano.models;
 
+import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class StudentChecking extends User{
+public class StudentChecking extends Account{
 
     private String secretKey;
     private Date creationDate;
@@ -18,8 +19,12 @@ public class StudentChecking extends User{
 
     }
 
-
-
+    public StudentChecking(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Date creationDate, Status status) {
+        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
+        this.secretKey = secretKey;
+        this.creationDate = creationDate;
+        this.status = status;
+    }
 
     public String getSecretKey() {
         return secretKey;

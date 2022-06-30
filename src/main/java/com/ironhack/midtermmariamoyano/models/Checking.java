@@ -25,7 +25,7 @@ public class Checking extends Account {
             @AttributeOverride(name = "amount", column = @Column(name = "monthly_maintenance_fee_amount")),
             @AttributeOverride(name = "currency", column = @Column(name = "monthly_maintenance_fee_currency"))
     })
-    @DecimalMin(value = "12", inclusive = true)
+  //  @DecimalMin(value = "12", inclusive = true)
     private Money monthlyMaintenanceFee=new Money(new BigDecimal("12"));;
     private Date creationDate;
     @Enumerated(EnumType.STRING)
@@ -35,7 +35,7 @@ public class Checking extends Account {
     public Checking() {
     }
 
-    public Checking( long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
+    public Checking( long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
         super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         setMinimumBalance(minimumBalance);

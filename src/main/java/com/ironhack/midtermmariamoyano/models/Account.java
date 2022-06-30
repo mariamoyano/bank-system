@@ -16,8 +16,14 @@ public abstract class Account {
             @AttributeOverride(name = "currency", column = @Column(name = "balance_currency"))
     })
     private Money balance;
-    private String primaryOwner;
-    private String secondaryOwner;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "primary_owner_id")
+    private AccountHolder primaryOwner;
+
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "secondary_owner_id")
+    private AccountHolder secondaryOwner;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "penalty_fee_amount")),
@@ -28,7 +34,7 @@ public abstract class Account {
     public Account() {
     }
 
-    public Account(long id, Money balance, String primaryOwner, String secondaryOwner, Money penaltyFee) {
+    public Account(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
         this.id = id;
         this.balance = balance;
         this.primaryOwner = primaryOwner;
@@ -44,19 +50,20 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public String getPrimaryOwner() {
+
+    public AccountHolder getPrimaryOwner() {
         return primaryOwner;
     }
 
-    public void setPrimaryOwner(String primaryOwner) {
+    public void setPrimaryOwner(AccountHolder primaryOwner) {
         this.primaryOwner = primaryOwner;
     }
 
-    public String getSecondaryOwner() {
+    public AccountHolder getSecondaryOwner() {
         return secondaryOwner;
     }
 
-    public void setSecondaryOwner(String secondaryOwner) {
+    public void setSecondaryOwner(AccountHolder secondaryOwner) {
         this.secondaryOwner = secondaryOwner;
     }
 
@@ -64,6 +71,11 @@ public abstract class Account {
         return penaltyFee;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
