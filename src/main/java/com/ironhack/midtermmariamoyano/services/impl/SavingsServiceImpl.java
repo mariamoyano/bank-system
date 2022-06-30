@@ -8,6 +8,14 @@ import com.ironhack.midtermmariamoyano.services.interfaces.SavingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class SavingsServiceImpl implements SavingsService {
     @Autowired
@@ -23,4 +31,14 @@ public class SavingsServiceImpl implements SavingsService {
     public void transferMoney(String ownerName, long id) {
 
     }
+
+
+
+    public Money getBalance(Long id) {
+        Optional<Savings> savings = savingsRepository.findById(id);
+        savings.get().interestBalance();
+        return savings.get().getBalance();
+    }
+
+
 }

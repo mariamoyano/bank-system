@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Optional;
 
 @Service
 public class CheckingServiceImpl implements CheckingService {
@@ -44,6 +45,11 @@ public class CheckingServiceImpl implements CheckingService {
 
         }
 
+    }
+
+    public Money getBalance(Long id) {
+        Optional<Checking> checking = checkingRepository.findById(id);
+        return checking.get().getBalance();
     }
 
 

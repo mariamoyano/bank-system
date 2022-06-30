@@ -42,11 +42,18 @@ public class Savings extends Account{
         this.creationDate = creationDate;
         this.status = status;
         this.interestRate=interestRate;
+        this.lastUpdateDate = creationDate;
     }
 
-
-
-
+    public Savings(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Date lastUpdateDate, Status status, BigDecimal interestRate) {
+        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
+        this.secretKey = secretKey;
+        this.minimumBalance = minimumBalance;
+        this.creationDate = creationDate;
+        this.lastUpdateDate = lastUpdateDate;
+        this.status = status;
+        this.interestRate = interestRate;
+    }
 
     public String getSecretKey() {
         return secretKey;
@@ -97,15 +104,27 @@ public class Savings extends Account{
 
     }
 
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
     public void interestBalance() {
 
         Period years = Period.between(lastUpdateDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
         int numberOfYears = years.getYears();
         if(numberOfYears>0){
-            setBalance(new Money(getBalance().increaseAmount(getBalance().getAmount().multiply(BigDecimal.valueOf(numberOfYears)).multiply(interestRate))));
+            setBalance(new Money(getBalance().increaseAmount(getBalance().getAmount().multiply(BigDecimal.valueOf(numberOfYears)).multiply(getInterestRate()))));
+            setLastUpdateDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         }else{
             setBalance(getBalance());
         }
 
     }
+
+
+
 }

@@ -13,10 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
+
 
 @RestController
 public class CheckingControllerImpl implements CheckingControllerInterface {
@@ -47,6 +44,11 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
         checkingService.createCheckingAccount(checking);
 
     }
+    @GetMapping("/savings-balance/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Money getBalance(@PathVariable(name = "id") Long id) {
+        return checkingService.getBalance(id);
 
+    }
 
 }
