@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.*;
 public interface CheckingControllerInterface {
 
     String checkingUser(CustomUserDetails userDetails);
-    String modifyBalance(BalanceDTO balanceDTO);
+   // String modifyBalance(BalanceDTO balanceDTO);
 }
