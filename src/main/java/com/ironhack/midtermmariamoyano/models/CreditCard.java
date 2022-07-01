@@ -6,6 +6,10 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -22,16 +26,24 @@ public class CreditCard extends Account{
     @DecimalMin(value = "0.1", inclusive = true)
     private BigDecimal interestRate=new BigDecimal("0.2");
 
+    private Date lastUpdateDate;
+
     public CreditCard() {
     }
 
+
     public CreditCard(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
         super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
-
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
     }
 
+    public CreditCard(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate, Date lastUpdateDate) {
+        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
+        this.creditLimit = creditLimit;
+        this.interestRate = interestRate;
+        this.lastUpdateDate = lastUpdateDate;
+    }
 
     public Money getCreditLimit() {
         return creditLimit;
@@ -62,7 +74,26 @@ public class CreditCard extends Account{
         this.interestRate = interestRate;
     }
 
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
 
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public void interestBalance() {
+
+        Period months = Period.between(lastUpdateDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+        int numberOfMonths = months.getMonths();
+        if(numberOfMonths>0){
+            setBalance(new Money(getBalance().increaseAmount(getBalance().getAmount().multiply(BigDecimal.valueOf(numberOfMonths)).multiply(getInterestRate()))));
+            setLastUpdateDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        }else{
+            setBalance(getBalance());
+        }
+
+    }
 
 
 }

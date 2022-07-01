@@ -28,6 +28,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     public Money getBalance(Long id) {
         Optional<CreditCard> creditCard = creditCardRepository.findById(id);
+        creditCard.get().interestBalance();
         return creditCard.get().getBalance();
     }
 }

@@ -38,7 +38,7 @@ public class CreditCardControllerImpl {
     }
 
 
-    @GetMapping("/savings-balance/{id}")
+    @GetMapping("/credit-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Money getBalance(@PathVariable(name = "id") Long id) {
         return creditCardService.getBalance(id);

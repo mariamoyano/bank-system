@@ -29,6 +29,8 @@ public class StudentCheckingControllerImpl {
 
     }
 
+
+    //PATCH????????????
     @PutMapping("/checking/{balance}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody @Valid Money balance) {
@@ -36,7 +38,7 @@ public class StudentCheckingControllerImpl {
     }
 
 
-    @GetMapping("/savings-balance/{id}")
+    @GetMapping("/student-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Money getBalance(@PathVariable(name = "id") Long id) {
         return studentCheckingService.getBalance(id);

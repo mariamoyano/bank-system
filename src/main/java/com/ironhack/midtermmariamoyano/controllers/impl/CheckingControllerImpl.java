@@ -44,7 +44,7 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
         checkingService.createCheckingAccount(checking);
 
     }
-    @GetMapping("/savings-balance/{id}")
+    @GetMapping("/checking-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Money getBalance(@PathVariable(name = "id") Long id) {
         return checkingService.getBalance(id);
