@@ -34,8 +34,8 @@ public abstract class Account {
     public Account() {
     }
 
-    public Account(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
-        this.id = id;
+    public Account( Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
+
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;

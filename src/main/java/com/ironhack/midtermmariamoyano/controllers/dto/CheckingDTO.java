@@ -20,7 +20,7 @@ public class CheckingDTO {
     private AccountHolder secondaryOwner;
 
     private String secretKey;
-
+    private Money penaltyFee;
     private Money minimumBalance;
     private Money monthlyMaintenanceFee;
     private Date creationDate;
@@ -89,5 +89,13 @@ public class CheckingDTO {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Money getPenaltyFee() {
+        return penaltyFee;
+    }
+
+    public void setPenaltyFee(Money penaltyFee) {
+        this.penaltyFee = penaltyFee;
     }
 }

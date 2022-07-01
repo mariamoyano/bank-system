@@ -35,8 +35,8 @@ public class Checking extends Account {
     public Checking() {
     }
 
-    public Checking( long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
-        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
+    public Checking(  Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
+        super( balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         setMinimumBalance(minimumBalance);
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;

@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class StudentChekcingAccountDTO {
+public class StudentCheckingDTO {
     @NotNull
     private Money balance;
     @NotNull

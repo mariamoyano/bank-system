@@ -1,6 +1,7 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.dto.CheckingDTO;
 import com.ironhack.midtermmariamoyano.controllers.interfaces.CheckingControllerInterface;
 import com.ironhack.midtermmariamoyano.models.Account;
 import com.ironhack.midtermmariamoyano.models.Checking;
@@ -33,9 +34,9 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
     //Create a new Checking account
     @PostMapping("/checkings")
     @ResponseStatus(HttpStatus.CREATED)
-    public void storeAccount(@RequestBody @Valid Checking checking) {
+    public void storeAccount(@RequestBody @Valid CheckingDTO checkingDTO) {
 
-        checkingService.createCheckingAccount(checking);
+        checkingService.createCheckingAccount(checkingDTO);
 
     }
     @GetMapping("/checking-balance/{id}")

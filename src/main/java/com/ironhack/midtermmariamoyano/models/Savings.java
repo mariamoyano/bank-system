@@ -35,8 +35,8 @@ public class Savings extends Account{
 
     }
 
-    public Savings(long id,Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
-        super(id,balance, primaryOwner, secondaryOwner, penaltyFee);
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         setMinimumBalance(minimumBalance);
         this.creationDate = creationDate;
@@ -45,8 +45,8 @@ public class Savings extends Account{
         this.lastUpdateDate = creationDate;
     }
 
-    public Savings(long id, Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Date lastUpdateDate, Status status, BigDecimal interestRate) {
-        super(id, balance, primaryOwner, secondaryOwner, penaltyFee);
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Date lastUpdateDate, Status status, BigDecimal interestRate) {
+        super(balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         this.minimumBalance = minimumBalance;
         this.creationDate = creationDate;

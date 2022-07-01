@@ -1,6 +1,10 @@
 package com.ironhack.midtermmariamoyano.services.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.dto.CheckingDTO;
+import com.ironhack.midtermmariamoyano.controllers.dto.StudentCheckingDTO;
+import com.ironhack.midtermmariamoyano.enums.Status;
+import com.ironhack.midtermmariamoyano.models.AccountHolder;
 import com.ironhack.midtermmariamoyano.models.Checking;
 import com.ironhack.midtermmariamoyano.models.StudentChecking;
 import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
@@ -32,15 +36,17 @@ public class CheckingServiceImpl implements CheckingService {
     public void transferMoney(String ownerName, long id) {
 
     }
-    public void createCheckingAccount(Checking checking){
-        Date date_of_birth = checking.getPrimaryOwner().getDate();
+    public void createCheckingAccount(CheckingDTO checkingDTO){
+        Date date_of_birth = checkingDTO.getPrimaryOwner().getDate();
         Period years = Period.between(date_of_birth.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
         int numberOfYears = years.getYears();
 
         if(numberOfYears<24){
-            StudentChecking studentChecking = new StudentChecking(checking.getId(),checking.getBalance(),checking.getPrimaryOwner(),checking.getSecondaryOwner(),checking.getPenaltyFee(), checking.getSecretKey(),checking.getCreationDate(),checking.getStatus());
+            StudentChecking studentChecking = new StudentChecking(checkingDTO.getBalance(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(), checkingDTO.getSecretKey(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
             studentCheckingRepository.save(studentChecking);
         }else{
+            Checking checking = new Checking(checkingDTO.getBalance(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(), checkingDTO.getSecretKey(),checkingDTO.getMinimumBalance(),checkingDTO.getMonthlyMaintenanceFee(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
+
             checkingRepository.save(checking);
 
         }
