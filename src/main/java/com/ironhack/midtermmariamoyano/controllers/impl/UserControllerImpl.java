@@ -38,6 +38,6 @@ public class UserControllerImpl implements UserControllerInterface {
     @DeleteMapping("/account-holders/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAccountHolder(@PathVariable Long id) {
-        userService.delete(id);
+        userService.deleteAccountHolder(id);
     }
 }

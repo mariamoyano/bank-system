@@ -1,9 +1,7 @@
 package com.ironhack.midtermmariamoyano.services.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
-import com.ironhack.midtermmariamoyano.models.Checking;
 import com.ironhack.midtermmariamoyano.models.CreditCard;
-import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
 import com.ironhack.midtermmariamoyano.repository.CreditCardRepository;
 import com.ironhack.midtermmariamoyano.services.interfaces.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     private CreditCardRepository creditCardRepository;
 
     @Override
-    public void updateBalance(Long id, Money balance) {
+    public void updateCreditCardBalance(Long id, Money balance) {
 
     }
 
@@ -28,7 +26,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
     public Money getBalance(Long id) {
         Optional<CreditCard> creditCard = creditCardRepository.findById(id);
-        creditCard.get().interestBalance();
-        return creditCard.get().getBalance();
+
+        return creditCard.get().interestBalance();
     }
 }

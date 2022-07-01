@@ -7,7 +7,7 @@ import com.ironhack.midtermmariamoyano.models.Checking;
 import java.math.BigDecimal;
 
 public interface CheckingService {
-    void updateBalance(Long id, Money balance);
+    void updateCheckingBalance(Long id, Money balance);
     void transferMoney(String ownerName,long id);
     void createCheckingAccount(Checking checking);
 

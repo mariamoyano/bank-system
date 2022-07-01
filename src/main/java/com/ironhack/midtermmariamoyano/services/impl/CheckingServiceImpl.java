@@ -24,7 +24,7 @@ public class CheckingServiceImpl implements CheckingService {
     private StudentCheckingRepository studentCheckingRepository;
 
     @Override
-    public void updateBalance(Long id, Money balance) {
+    public void updateCheckingBalance(Long id, Money balance) {
 
     }
 

@@ -22,16 +22,11 @@ public class StudentCheckingControllerImpl {
     @Autowired
     private StudentCheckingService studentCheckingService;
 
-    @GetMapping("/checking-user")
-    @ResponseStatus(HttpStatus.OK)
-    public String checkingUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        return userDetails.getUser().getUsername();
 
-    }
 
 
     //PATCH????????????
-    @PutMapping("/checking/{balance}")
+    @PutMapping("/student-checking/{balance}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @RequestBody @Valid Money balance) {
         studentCheckingService.updateBalance(id, balance);

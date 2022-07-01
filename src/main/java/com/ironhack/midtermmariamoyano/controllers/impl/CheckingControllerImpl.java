@@ -23,17 +23,11 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
 
     @Autowired
     private CheckingService checkingService;
-    @GetMapping("/checking-user")
-    @ResponseStatus(HttpStatus.OK)
-    public String checkingUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        return userDetails.getUser().getUsername();
-
-    }
 
     @PutMapping("/checking/{balance}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable long id, @RequestBody @Valid Money balance) {
-        checkingService.updateBalance(id, balance);
+    public void updateChecking(@PathVariable long id, @RequestBody @Valid Money balance) {
+        checkingService.updateCheckingBalance(id, balance);
     }
 
     //Create a new Checking account
@@ -46,7 +40,7 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
     }
     @GetMapping("/checking-balance/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Money getBalance(@PathVariable(name = "id") Long id) {
+    public Money getCheckingBalance(@PathVariable(name = "id") Long id) {
         return checkingService.getBalance(id);
 
     }

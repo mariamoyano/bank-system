@@ -82,15 +82,17 @@ public class CreditCard extends Account{
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public void interestBalance() {
+    public Money interestBalance() {
 
         Period months = Period.between(lastUpdateDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
         int numberOfMonths = months.getMonths();
         if(numberOfMonths>0){
             setBalance(new Money(getBalance().increaseAmount(getBalance().getAmount().multiply(BigDecimal.valueOf(numberOfMonths)).multiply(getInterestRate()))));
             setLastUpdateDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            return getBalance();
         }else{
-            setBalance(getBalance());
+
+            return getBalance();
         }
 
     }
