@@ -4,7 +4,6 @@ import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,7 +11,7 @@ import java.time.ZoneId;
 import java.util.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Savings extends Account{
+public class Savings extends Accounts {
 
     private String secretKey;
 
@@ -26,7 +25,7 @@ public class Savings extends Account{
     private Date creationDate;
     private Date lastUpdateDate;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status accountStatus;
     @DecimalMax(value = "0.5", inclusive = true)
     @Column(name = "interest_rate")
     private BigDecimal interestRate = new BigDecimal(0.025);
@@ -35,12 +34,12 @@ public class Savings extends Account{
 
     }
 
-    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Status status, BigDecimal interestRate) {
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Date creationDate, Status accountStatus, BigDecimal interestRate) {
         super(balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         setMinimumBalance(minimumBalance);
         this.creationDate = creationDate;
-        this.status = status;
+        this.accountStatus = accountStatus;
         this.interestRate=interestRate;
         this.lastUpdateDate = creationDate;
     }
@@ -51,7 +50,7 @@ public class Savings extends Account{
         this.minimumBalance = minimumBalance;
         this.creationDate = creationDate;
         this.lastUpdateDate = lastUpdateDate;
-        this.status = status;
+        this.accountStatus = accountStatus;
         this.interestRate = interestRate;
     }
 
@@ -87,11 +86,11 @@ public class Savings extends Account{
     }
 
     public Status getStatus() {
-        return status;
+        return accountStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(Status accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
     public BigDecimal getInterestRate() {

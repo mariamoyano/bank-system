@@ -2,10 +2,8 @@ package com.ironhack.midtermmariamoyano.models;
 import com.ironhack.midtermmariamoyano.classes.Money;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -13,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class CreditCard extends Account{
+public class CreditCard extends Accounts {
 
     @Embedded
     @AttributeOverrides({

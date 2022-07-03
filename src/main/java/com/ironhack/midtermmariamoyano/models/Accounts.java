@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Account {
+public abstract class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,10 +31,10 @@ public abstract class Account {
     })
     private final Money penaltyFee = new Money(new BigDecimal("40"));
 
-    public Account() {
+    public Accounts() {
     }
 
-    public Account( Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
+    public Accounts(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
 
         this.balance = balance;
         this.primaryOwner = primaryOwner;

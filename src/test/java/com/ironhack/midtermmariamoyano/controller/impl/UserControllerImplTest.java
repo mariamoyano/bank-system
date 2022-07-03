@@ -71,8 +71,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
             userRepository.deleteAll();
         }
 
-        @Test
-        void hello() throws Exception {
+    @Test
+    void hello() throws Exception {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("Authorization", "Basic YWRtaW46MTIzNDU2");
             httpHeaders.add("Authorization", "Basic dGVjaG5pY2lhbjoxMjM0NTY=");
@@ -87,6 +87,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     void helloUser() throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Basic YWRtaW46MTIzNDU2");
+        httpHeaders.add("Authorization", "Basic dGVjaG5pY2lhbjoxMjM0NTY=");
         MvcResult mvcResult = mockMvc.perform(get("/hello-user").headers(httpHeaders))
                 .andExpect(status().isOk())
                 .andReturn();

@@ -4,12 +4,11 @@ import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.Date;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Checking extends Account {
+public class Checking extends Accounts {
 
     private String secretKey;
 
@@ -29,19 +28,19 @@ public class Checking extends Account {
     private Money monthlyMaintenanceFee=new Money(new BigDecimal("12"));;
     private Date creationDate;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status accountStatus;
 
 
     public Checking() {
     }
 
-    public Checking(  Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status status) {
+    public Checking(  Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status accountStatus) {
         super( balance, primaryOwner, secondaryOwner, penaltyFee);
         this.secretKey = secretKey;
         setMinimumBalance(minimumBalance);
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.creationDate = creationDate;
-        this.status = status;
+        this.accountStatus = accountStatus;
     }
 
 
@@ -89,10 +88,10 @@ public class Checking extends Account {
     }
 
     public Status getStatus() {
-        return status;
+        return accountStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(Status accountStatus) {
+        this.accountStatus = accountStatus;
     }
 }
