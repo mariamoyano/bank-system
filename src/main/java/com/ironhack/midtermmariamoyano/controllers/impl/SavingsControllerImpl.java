@@ -1,10 +1,7 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
-import com.ironhack.midtermmariamoyano.models.Savings;
-import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
 import com.ironhack.midtermmariamoyano.repository.SavingsRepository;
-import com.ironhack.midtermmariamoyano.services.interfaces.CheckingService;
 import com.ironhack.midtermmariamoyano.services.interfaces.SavingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -3,12 +3,10 @@ package com.ironhack.midtermmariamoyano.controllers.dto;
 import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.enums.Status;
 import com.ironhack.midtermmariamoyano.models.AccountHolder;
-import net.bytebuddy.implementation.bind.annotation.Default;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
+
 import java.util.Date;
 
 

@@ -13,7 +13,7 @@ public class User {
     private Long id;
     private String username;
     private String password;
-
+    private String name;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -21,9 +21,11 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password,String name) {
         this.username = username;
         this.password = password;
+        this.name = name;
+
     }
 
     public Long getId() {
@@ -56,5 +58,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

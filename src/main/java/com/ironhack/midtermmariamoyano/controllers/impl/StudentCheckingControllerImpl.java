@@ -1,14 +1,10 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
-import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
 import com.ironhack.midtermmariamoyano.repository.StudentCheckingRepository;
-import com.ironhack.midtermmariamoyano.security.CustomUserDetails;
-import com.ironhack.midtermmariamoyano.services.interfaces.CheckingService;
 import com.ironhack.midtermmariamoyano.services.interfaces.StudentCheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

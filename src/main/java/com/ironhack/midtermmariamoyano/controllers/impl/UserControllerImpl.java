@@ -21,6 +21,13 @@ public class UserControllerImpl implements UserControllerInterface {
     @Autowired
     UserService userService;
 
+    @GetMapping("/hello")
+    @ResponseStatus(HttpStatus.OK)
+    public String hello(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        return "WELCOME !!!";
+    }
+
+
 
     @GetMapping("/hello-user")
     @ResponseStatus(HttpStatus.OK)
@@ -36,8 +43,8 @@ public class UserControllerImpl implements UserControllerInterface {
 
 
     @DeleteMapping("/account-holders/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAccountHolder(@PathVariable Long id) {
-        userService.deleteAccountHolder(id);
+        userService.delete(id);
     }
 }

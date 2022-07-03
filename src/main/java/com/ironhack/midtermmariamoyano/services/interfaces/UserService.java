@@ -7,5 +7,5 @@ import javax.validation.Valid;
 
 public interface UserService {
     AccountHolder createAccountHolder(AccountHolder accountHolder);
-    void deleteAccountHolder(Long id);
+    void delete(Long id);
 }

@@ -2,11 +2,9 @@ package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.repository.CreditCardRepository;
-import com.ironhack.midtermmariamoyano.security.CustomUserDetails;
 import com.ironhack.midtermmariamoyano.services.interfaces.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

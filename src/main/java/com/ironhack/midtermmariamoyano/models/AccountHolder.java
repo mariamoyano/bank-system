@@ -10,7 +10,7 @@ import java.sql.Date;
 @PrimaryKeyJoinColumn(name = "id")
 public class AccountHolder extends User{
 
-    private String name;
+
     @Column(name="date_of_birth")
     private Date date;
 
@@ -35,21 +35,20 @@ public class AccountHolder extends User{
     public AccountHolder() {
     }
 
+    public AccountHolder(String username, String password, String name, Date date, Address address) {
+        super(username, password, name);
+        this.date = date;
+        this.address = address;
+
+    }
+
     public AccountHolder(String username, String password, String name, Date date, Address address, Address mailingAddress) {
-        super(username, password);
-        this.name = name;
+        super(username, password, name);
         this.date = date;
         this.address = address;
         this.mailingAddress = mailingAddress;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Date getDate() {
         return date;

@@ -4,5 +4,6 @@ import com.ironhack.midtermmariamoyano.security.CustomUserDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 public interface UserControllerInterface {
-    String helloUser(@AuthenticationPrincipal CustomUserDetails userDetails);
+    String hello(@AuthenticationPrincipal CustomUserDetails userDetails);
+    void deleteAccountHolder(Long id);
 }

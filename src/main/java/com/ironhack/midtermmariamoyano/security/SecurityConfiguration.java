@@ -22,7 +22,8 @@ public class SecurityConfiguration {
         http.httpBasic(); // Vamos a utilizar basic auth
         http.csrf().disable(); // Desactivamos la protección CSRF porque nosotros no vamos a manejar el HTML
         http.authorizeRequests() // Vamos a estacler la protección de cada endpoint individualmente
-                .antMatchers(HttpMethod.GET, "/", "/").authenticated() // solo usuarios autenticados
+                .antMatchers(HttpMethod.GET, "/hello-user").authenticated() // solo usuarios autenticados
+                .antMatchers(HttpMethod.GET, " /account-holders/{id}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.GET, "/checking/{balance}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.GET, "/savings/{balance}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.GET, "/student-checking/{balance}").hasRole("ADMIN") // Solo ADMIN
@@ -30,6 +31,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.PUT, "/checking/{balance}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.PUT, "/savings/{balance}").hasRole("ADMIN") // Solo ADMIN"
                 .antMatchers(HttpMethod.PUT, "/student-checking/{balance}").hasRole("ADMIN") // Solo ADMIN
+
                 .antMatchers(HttpMethod.PUT, "/credit-card/{balance}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.POST, "/checkings").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/users").hasRole("ADMIN") //add user third-party

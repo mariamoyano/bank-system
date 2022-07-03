@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
         return (AccountHolder) optionalAccountHolder.get();
     }
 
-    public void deleteAccountHolder(Long id) {
-        User course = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        userRepository.delete(course);
+    public void delete(Long id) {
+        User accountholder = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        userRepository.delete(accountholder);
 
     }
 }
