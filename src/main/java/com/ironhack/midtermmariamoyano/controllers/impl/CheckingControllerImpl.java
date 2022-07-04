@@ -21,9 +21,9 @@ public class CheckingControllerImpl implements CheckingControllerInterface {
     @Autowired
     private CheckingService checkingService;
 
-    @PutMapping("/checking/{balance}")
+    @PatchMapping("/checking/{id}/balance")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateChecking(@PathVariable long id, @RequestBody @Valid Money balance) {
+    public void updateChecking(@PathVariable Long id, @RequestBody @Valid int balance) {
         checkingService.updateCheckingBalance(id, balance);
     }
 

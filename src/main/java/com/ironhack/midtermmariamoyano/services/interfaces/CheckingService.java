@@ -4,7 +4,7 @@ import com.ironhack.midtermmariamoyano.classes.Money;
 import com.ironhack.midtermmariamoyano.controllers.dto.CheckingDTO;
 
 public interface CheckingService {
-    void updateCheckingBalance(Long id, Money balance);
+    void updateCheckingBalance(Long id, int balance);
     void transferMoney(String ownerName,long id);
     void createCheckingAccount(CheckingDTO checkingDTO);
 

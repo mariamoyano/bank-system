@@ -9,6 +9,7 @@ import com.ironhack.midtermmariamoyano.services.interfaces.StudentCheckingServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -19,8 +20,9 @@ public class StudentCheckingServiceImpl implements StudentCheckingService {
 
 
     @Override
-    public void updateBalance(Long id, Money balance) {
-
+    public void updateStudentBalance(Long id, int balance) {
+        Optional <StudentChecking> studentCheckingOptional = studentCheckingRepository.findById(id);
+        studentCheckingOptional.get().setBalance(new Money(BigDecimal.valueOf(balance)));
     }
 
     @Override

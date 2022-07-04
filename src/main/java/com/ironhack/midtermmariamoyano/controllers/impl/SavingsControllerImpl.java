@@ -1,6 +1,7 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.interfaces.SavingsControllerInterface;
 import com.ironhack.midtermmariamoyano.repository.SavingsRepository;
 import com.ironhack.midtermmariamoyano.services.interfaces.SavingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-public class SavingsControllerImpl {
+public class SavingsControllerImpl implements SavingsControllerInterface {
 
     @Autowired
     private SavingsRepository SavingsRepository;
@@ -26,5 +27,11 @@ public class SavingsControllerImpl {
     public Money getBalance(@PathVariable(name = "id") Long id) {
         return savingsService.getBalance(id);
 
+    }
+
+    @PatchMapping("/savings/{id}/balance/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateSavingsBalance(@PathVariable Long id, @RequestBody @Valid  int balance) {
+        savingsService.updateSavingsBalance(id, balance);
     }
 }

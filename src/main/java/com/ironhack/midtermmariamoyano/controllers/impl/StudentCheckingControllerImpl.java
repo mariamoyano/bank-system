@@ -1,6 +1,7 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.interfaces.StudentCheckingControllerInterface;
 import com.ironhack.midtermmariamoyano.repository.StudentCheckingRepository;
 import com.ironhack.midtermmariamoyano.services.interfaces.StudentCheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-public class StudentCheckingControllerImpl {
+public class StudentCheckingControllerImpl implements StudentCheckingControllerInterface {
 
     @Autowired
     private StudentCheckingRepository studentCheckingRepository;
@@ -20,12 +21,10 @@ public class StudentCheckingControllerImpl {
 
 
 
-
-    //PATCH????????????
-    @PutMapping("/student-checking/{balance}")
+    @PatchMapping("/student-checking/{id}/balance")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable long id, @RequestBody @Valid Money balance) {
-        studentCheckingService.updateBalance(id, balance);
+    public void updateStudentBalance(@PathVariable Long id, @RequestBody @Valid int balance) {
+        studentCheckingService.updateStudentBalance(id, balance);
     }
 
 

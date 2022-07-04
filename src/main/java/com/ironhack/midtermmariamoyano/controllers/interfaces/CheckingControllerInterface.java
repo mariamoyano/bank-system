@@ -8,7 +8,7 @@ public interface CheckingControllerInterface {
 
 
    // String modifyBalance(BalanceDTO balanceDTO);
-   void updateChecking( long id,  Money balance);
+   void updateChecking( Long id,  int balance);
 
     void storeAccount(CheckingDTO checkingDTO);
     Money getCheckingBalance( Long id);

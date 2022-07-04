@@ -1,6 +1,7 @@
 package com.ironhack.midtermmariamoyano.controllers.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.interfaces.CreditCardControllerInterface;
 import com.ironhack.midtermmariamoyano.repository.CreditCardRepository;
 import com.ironhack.midtermmariamoyano.services.interfaces.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-public class CreditCardControllerImpl {
+public class CreditCardControllerImpl implements CreditCardControllerInterface {
 
     @Autowired
     private CreditCardRepository creditCardRepository;

@@ -1,6 +1,7 @@
 package com.ironhack.midtermmariamoyano.services.impl;
 
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.models.Checking;
 import com.ironhack.midtermmariamoyano.models.Savings;
 import com.ironhack.midtermmariamoyano.repository.CheckingRepository;
 import com.ironhack.midtermmariamoyano.repository.SavingsRepository;
@@ -23,8 +24,9 @@ public class SavingsServiceImpl implements SavingsService {
 
 
     @Override
-    public void updateBalance(Long id, Money balance) {
-
+    public void updateSavingsBalance(Long id, int balance) {
+        Optional <Savings> savingsOptional = savingsRepository.findById(id);
+        savingsOptional.get().setBalance(new Money(BigDecimal.valueOf(balance)));
     }
 
     @Override
