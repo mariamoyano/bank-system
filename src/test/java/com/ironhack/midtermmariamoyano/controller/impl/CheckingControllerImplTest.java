@@ -72,6 +72,7 @@ public class CheckingControllerImplTest {
         accountHolder1 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder1", Date.valueOf("1987-03-16"),address3,address4);
         accountHolder2 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder2", Date.valueOf("1997-08-9"),primaryOwner,secondaryOwner);
         checking =new Checking(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"123456",new Money(new BigDecimal(250)),new Money(new BigDecimal(12)),Date.valueOf("2021-05-22"), Status.ACTIVE);
+        checkingRepository.saveAll(List.of(checking));
     }
     @AfterEach
     void tearDown() {
@@ -100,7 +101,21 @@ public class CheckingControllerImplTest {
         assertTrue(mvcResult.getResponse().getContentAsString().contains("1000"));
     }
 
+    @Test
+    void createChecking_test_OK() throws Exception {
 
+        String body = objectMapper.writeValueAsString(checking);
+        MvcResult mvcResult = mockMvc.perform(
+                        post("/checkings")
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+
+                )
+                .andExpect(status().isCreated())
+                .andReturn();
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("checkings"));
+
+    }
 
 }
 

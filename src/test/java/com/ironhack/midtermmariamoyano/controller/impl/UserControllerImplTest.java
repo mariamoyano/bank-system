@@ -118,11 +118,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
     @Test
     void deleteAccountHolder_test_OK() throws Exception {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Basic YWRtaW46MTIzNDU2");
+
         String body = objectMapper.writeValueAsString(accountHolder);
 
-        MvcResult mvcResult = mockMvc.perform(delete("/account-holders/"+ accountHolder.getId()))
+        MvcResult mvcResult = mockMvc.perform(delete("/account-holders/"+ accountHolder.getId())
+
+
+                )
                 .andExpect(status().isNoContent())
                 .andReturn();
         assertFalse(userRepository.existsById(accountHolder.getId()));
