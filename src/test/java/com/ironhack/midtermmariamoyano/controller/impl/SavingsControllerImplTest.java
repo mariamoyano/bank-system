@@ -71,7 +71,7 @@ public class SavingsControllerImplTest {
         accountHolder1 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder1", Date.valueOf("1987-03-16"),address3,address4);
         accountHolder2 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder2", Date.valueOf("1997-08-9"),primaryOwner,secondaryOwner);
 
-        savings =new Savings(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"123456",new Money(new BigDecimal(250)),Date.valueOf("2020-05-22"),Date.valueOf("2021-05-22"), Status.ACTIVE, BigDecimal.valueOf(0.2));
+        savings =new Savings(new Money(new BigDecimal(1000)),"123456",accountHolder1,accountHolder2,new Money(new BigDecimal(40)),new Money(new BigDecimal(250)),Date.valueOf("2020-05-22"),Date.valueOf("2021-05-22"), Status.ACTIVE, BigDecimal.valueOf(0.2));
     }
     @AfterEach
     void tearDown() {

@@ -72,7 +72,7 @@ public class StudentControllerImplTest {
         Address address4=  new Address("Plaza nombre4","Madrid",28033);
         accountHolder1 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder1", Date.valueOf("1987-03-16"),address3,address4);
         accountHolder2 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder2", Date.valueOf("1997-08-9"),primaryOwner,secondaryOwner);
-        studentChecking =new StudentChecking(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"123456",Date.valueOf("2021-05-22"), Status.ACTIVE);
+        studentChecking =new StudentChecking(new Money(new BigDecimal(1000)),"123456",accountHolder1,accountHolder2,new Money(new BigDecimal(40)),Date.valueOf("2021-05-22"), Status.ACTIVE);
     }
     @AfterEach
     void tearDown() {

@@ -72,7 +72,7 @@ public class CreditCardControllerImplTest {
         Address address4=  new Address("Plaza nombre4","Madrid",28033);
         accountHolder1 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder1", Date.valueOf("1987-03-16"),address3,address4);
         accountHolder2 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder2", Date.valueOf("1997-08-9"),primaryOwner,secondaryOwner);
-        creditCard =new CreditCard(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),new Money(new BigDecimal(250)),BigDecimal.valueOf(0.2),Date.valueOf("2021-05-22"));
+        creditCard =new CreditCard(new Money(new BigDecimal(1000)),"12345",accountHolder1,accountHolder2,new Money(new BigDecimal(40)),new Money(new BigDecimal(250)),BigDecimal.valueOf(0.2),Date.valueOf("2021-05-22"));
     }
     @AfterEach
     void tearDown() {
