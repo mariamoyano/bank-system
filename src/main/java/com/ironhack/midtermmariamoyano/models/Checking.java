@@ -10,7 +10,7 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name = "id")
 public class Checking extends Accounts {
 
-    private String secretKey;
+
 
     @Embedded
     @AttributeOverrides({
@@ -34,9 +34,8 @@ public class Checking extends Accounts {
     public Checking() {
     }
 
-    public Checking(  Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status accountStatus) {
-        super( balance, primaryOwner, secondaryOwner, penaltyFee);
-        this.secretKey = secretKey;
+    public Checking(  Money balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money minimumBalance, Money monthlyMaintenanceFee, Date creationDate, Status accountStatus) {
+        super( balance, secretKey,primaryOwner, secondaryOwner, penaltyFee);
         setMinimumBalance(minimumBalance);
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.creationDate = creationDate;
@@ -44,14 +43,6 @@ public class Checking extends Accounts {
     }
 
 
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
 
 

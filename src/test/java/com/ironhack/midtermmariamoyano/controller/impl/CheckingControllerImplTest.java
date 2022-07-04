@@ -54,10 +54,10 @@ public class CheckingControllerImplTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper(); // Hacer bodies
     AccountHolder accountHolder1,accountHolder2;
-    Checking checking;
+    Checking checking1, checking2;
     @BeforeEach
     void setUp() {
-        admin = new Admin("admin", passwordEncoder.encode("123456"),"admin1");
+        admin = new Admin("admin", passwordEncoder.encode("123456"),"ADMIN");
         adminRole = new Role("ADMIN", admin);
         admin.setRoles(Set.of(adminRole));
         Address primaryOwner = new Address("Calle nombre1","Madrid",28002);
@@ -71,8 +71,10 @@ public class CheckingControllerImplTest {
         Address address4=  new Address("Plaza nombre4","Madrid",28033);
         accountHolder1 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder1", Date.valueOf("1987-03-16"),address3,address4);
         accountHolder2 =  new AccountHolder("accountholder", passwordEncoder.encode("123456"),"Holder2", Date.valueOf("1997-08-9"),primaryOwner,secondaryOwner);
-        checking =new Checking(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"123456",new Money(new BigDecimal(250)),new Money(new BigDecimal(12)),Date.valueOf("2021-05-22"), Status.ACTIVE);
-        checkingRepository.saveAll(List.of(checking));
+        checking1 =new Checking(new Money(new BigDecimal(1000)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"123456",new Money(new BigDecimal(250)),new Money(new BigDecimal(12)),Date.valueOf("2021-05-22"), Status.ACTIVE);
+        checking2 =new Checking(new Money(new BigDecimal(1050)),accountHolder1,accountHolder2,new Money(new BigDecimal(40)),"1234567",new Money(new BigDecimal(250)),new Money(new BigDecimal(12)),Date.valueOf("2021-05-22"), Status.ACTIVE);
+
+        checkingRepository.saveAll(List.of(checking1,checking2));
     }
     @AfterEach
     void tearDown() {
@@ -81,18 +83,20 @@ public class CheckingControllerImplTest {
 
     @Test
     void getBalance_Test() throws Exception {
-        String body = objectMapper.writeValueAsString(checking);
-        MvcResult mvcResult = mockMvc.perform(get("/checking-balance/"+checking.getId()))
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Basic YWRtaW46MTIzNDU2");
+        String body = objectMapper.writeValueAsString(checking1);
+        MvcResult mvcResult = mockMvc.perform(get("/checking-balance/"+checking1.getId())
+                .headers(httpHeaders))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertTrue(mvcResult.getResponse().getContentAsString().contains("1000"));
     }
     @Test
     void updateCheckingBalance_Test() throws Exception {
-        String body = objectMapper.writeValueAsString(checking);
+        String body = objectMapper.writeValueAsString(checking1);
 
-        MvcResult mvcResult = mockMvc.perform(patch("/checking/"+checking.getId()+"/balance")
+        MvcResult mvcResult = mockMvc.perform(patch("/checking/"+checking1.getId()+"/balance")
                         .content(body)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -104,7 +108,7 @@ public class CheckingControllerImplTest {
     @Test
     void createChecking_test_OK() throws Exception {
 
-        String body = objectMapper.writeValueAsString(checking);
+        String body = objectMapper.writeValueAsString(checking1);
         MvcResult mvcResult = mockMvc.perform(
                         post("/checkings")
                                 .content(body)

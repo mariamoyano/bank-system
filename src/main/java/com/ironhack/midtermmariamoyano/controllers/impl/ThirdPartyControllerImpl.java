@@ -17,16 +17,16 @@ public class ThirdPartyControllerImpl implements ThirdPartyControllerInterface {
     @Autowired
     private ThirdPartyService thirdPartyService;
 
-    @PostMapping("/third-party")
+    @PostMapping("/third-parties")
     @ResponseStatus(HttpStatus.CREATED)
     public ThirdParty store(@RequestBody @Valid ThirdPartyDTO thirdPartyDTO) {
         ThirdParty thirdParty =  store(thirdPartyDTO);
         return thirdPartyRepository.save(thirdParty);
     }
 
-    @PatchMapping("/thirdparty")
-    @ResponseStatus(HttpStatus.OK)
-    public void transfer(@RequestParam String hashedKey, @RequestBody @Valid  ThirdPartyDTO thirdPartyDTO){
-        thirdPartyService.transfer(hashedKey, thirdPartyDTO);
-    }
+//    @PatchMapping("/third-party/{hashedKey}/transfer")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void transfer(@RequestParam String hashedKey, @RequestBody @Valid  ThirdPartyDTO thirdPartyDTO){
+//        thirdPartyService.transfer(hashedKey, thirdPartyDTO);
+//    }
 }

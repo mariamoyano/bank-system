@@ -24,22 +24,23 @@ public class SecurityConfiguration {
         http.authorizeRequests() // Vamos a estacler la protección de cada endpoint individualmente
                 //USER
                 .antMatchers(HttpMethod.GET, "/hello").authenticated() // solo usuarios autenticados
-                .antMatchers(HttpMethod.GET, "/hello-user").hasAnyRole("ACCOUNT_HOLDER")
+                .antMatchers(HttpMethod.GET, "/hello-user").hasAnyRole("ACCOUNT_HOLDER","ADMIN")
                 .antMatchers(HttpMethod.DELETE, " /account-holders/{id}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.POST, "/accounts-holders").hasRole("ADMIN") // Solo ADMIN
                 //
-                .antMatchers(HttpMethod.GET, "/savings/{balance}").hasRole("ADMIN") // Solo ADMIN
-                .antMatchers(HttpMethod.GET, "/student-checking/{balance}").hasRole("ADMIN") // Solo ADMIN
-                .antMatchers(HttpMethod.GET, "/credit-card/{balance}").hasRole("ADMIN") // Solo ADMIN
-                .antMatchers(HttpMethod.PUT, "/checking/{balance}").hasRole("ADMIN") // Solo ADMIN
-                .antMatchers(HttpMethod.PUT, "/savings/{balance}").hasRole("ADMIN") // Solo ADMIN"
-                .antMatchers(HttpMethod.PUT, "/student-checking/{balance}").hasRole("ADMIN") // Solo ADMIN
-
-                .antMatchers(HttpMethod.PUT, "/credit-card/{balance}").hasRole("ADMIN") // Solo ADMIN
                 .antMatchers(HttpMethod.POST, "/checkings").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/users").hasRole("ADMIN") //add user third-party
-                .antMatchers(HttpMethod.GET, "/checking/{balance}").hasAnyRole("ACCOUNT_HOLDER")
-                .antMatchers(HttpMethod.GET, "/checking/{balance}").hasAnyRole("ACCOUNT_HOLDER") //TRANSFER
+                .antMatchers(HttpMethod.POST, "/third-parties").hasRole("ADMIN")
+                //
+                .antMatchers(HttpMethod.GET, "/savings-balance/{id}").hasAnyRole("ACCOUNT_HOLDER","ADMIN") // Solo ADMIN
+                .antMatchers(HttpMethod.GET, "/student-balance/{id}").hasAnyRole("ACCOUNT_HOLDER","ADMIN") // Solo ADMIN
+                .antMatchers(HttpMethod.GET, "/credit-balance/{id}").hasAnyRole("ACCOUNT_HOLDER","ADMIN") // Solo ADMIN
+                .antMatchers(HttpMethod.GET, "/checking-balance/{id}").hasAnyRole("ACCOUNT_HOLDER","ADMIN") // Solo ADMIN"
+                //
+                .antMatchers(HttpMethod.PATCH, "/checking/{id}/balance").hasRole("ADMIN") // Solo ADMIN
+                .antMatchers(HttpMethod.PATCH, "/savings/{id}/balance").hasRole("ADMIN") // Solo ADMIN"
+                .antMatchers(HttpMethod.PATCH, "/student-checking/{id}/balance").hasRole("ADMIN") // Solo ADMIN
+                .antMatchers(HttpMethod.PATCH, "/credit-card/{id}/balance").hasRole("ADMIN") // Solo ADMIN
+
                 .anyRequest().permitAll(); // El resto de los enpoints son públicos
         return http.build();
     }

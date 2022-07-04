@@ -30,14 +30,14 @@ public class CreditCard extends Accounts {
     }
 
 
-    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
-        super( balance, primaryOwner, secondaryOwner, penaltyFee);
+    public CreditCard(Money balance, String secretKey,AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate) {
+        super( balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
     }
 
-    public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate, Date lastUpdateDate) {
-        super(balance, primaryOwner, secondaryOwner, penaltyFee);
+    public CreditCard(Money balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Money creditLimit, BigDecimal interestRate, Date lastUpdateDate) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
         this.lastUpdateDate = lastUpdateDate;

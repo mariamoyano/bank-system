@@ -9,5 +9,5 @@ import javax.validation.Valid;
 
 public interface ThirdPartyControllerInterface {
     ThirdParty store(ThirdPartyDTO thirdPartyDTO);
-    void transfer(String hashedKey, ThirdPartyDTO thirdPartyDTO);
+
 }

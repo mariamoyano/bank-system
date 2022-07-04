@@ -3,6 +3,7 @@ package com.ironhack.midtermmariamoyano.models;
 import com.ironhack.midtermmariamoyano.classes.Money;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -10,12 +11,15 @@ public abstract class Accounts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "amount", column = @Column(name = "balance_amount")),
             @AttributeOverride(name = "currency", column = @Column(name = "balance_currency"))
     })
     private Money balance;
+    @NotNull
+    private String secretKey;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "primary_owner_id")
@@ -34,14 +38,14 @@ public abstract class Accounts {
     public Accounts() {
     }
 
-    public Accounts(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
+    public Accounts(Money balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee) {
 
         this.balance = balance;
+        this.secretKey =secretKey;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
 
     }
-
     public Money getBalance() {
         return balance;
     }

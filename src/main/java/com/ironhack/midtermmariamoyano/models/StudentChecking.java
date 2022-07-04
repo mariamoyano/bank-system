@@ -9,7 +9,7 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name = "id")
 public class StudentChecking extends Accounts {
 
-    private String secretKey;
+
     private Date creationDate;
     @Enumerated(EnumType.STRING)
     private Status accountStatus;
@@ -18,20 +18,12 @@ public class StudentChecking extends Accounts {
 
     }
 
-    public StudentChecking( Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, String secretKey, Date creationDate, Status accountStatus) {
-        super(balance, primaryOwner, secondaryOwner, penaltyFee);
-        this.secretKey = secretKey;
+    public StudentChecking( Money balance, String secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Money penaltyFee, Date creationDate, Status accountStatus) {
+        super(balance, secretKey, primaryOwner, secondaryOwner, penaltyFee);
         this.creationDate = creationDate;
         this.accountStatus = accountStatus;
     }
 
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
     public Date getCreationDate() {
         return creationDate;

@@ -6,11 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.Optional;
 
 @Repository
 public interface AccountsRepository extends JpaRepository<Accounts, Long> {
-    @Query("SELECT hashed_key FROM Accounts WHERE id = :id")
-    String findHashedKeyById(@Param("id") Long id);
+
+    Optional<Accounts> findById(Long id);
+//    @Query("SELECT hashed_key FROM Accounts WHERE id = :id")
+//    String findSecretKeyById(@Param("id") Long id);
+
 }
 

@@ -46,10 +46,10 @@ public class CheckingServiceImpl implements CheckingService {
         int numberOfYears = years.getYears();
 
         if(numberOfYears<24){
-            StudentChecking studentChecking = new StudentChecking(checkingDTO.getBalance(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(), checkingDTO.getSecretKey(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
+            StudentChecking studentChecking = new StudentChecking(checkingDTO.getBalance(), checkingDTO.getSecretKey(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
             studentCheckingRepository.save(studentChecking);
         }else{
-            Checking checking = new Checking(checkingDTO.getBalance(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(), checkingDTO.getSecretKey(),checkingDTO.getMinimumBalance(),checkingDTO.getMonthlyMaintenanceFee(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
+            Checking checking = new Checking(checkingDTO.getBalance(), checkingDTO.getSecretKey(),checkingDTO.getPrimaryOwner(),checkingDTO.getSecondaryOwner(),checkingDTO.getPenaltyFee(),checkingDTO.getMinimumBalance(),checkingDTO.getMonthlyMaintenanceFee(),checkingDTO.getCreationDate(),checkingDTO.getStatus());
 
             checkingRepository.save(checking);
 
