@@ -2,6 +2,7 @@ package com.ironhack.midtermmariamoyano.controller.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.midtermmariamoyano.classes.Address;
 import com.ironhack.midtermmariamoyano.classes.Money;
+import com.ironhack.midtermmariamoyano.controllers.dto.ThirdPartyDTO;
 import com.ironhack.midtermmariamoyano.models.*;
 import com.ironhack.midtermmariamoyano.repository.CreditCardRepository;
 import com.ironhack.midtermmariamoyano.repository.ThirdPartyRepository;
@@ -88,12 +89,17 @@ public class ThirdPartyControllerImplTest {
     void thirdPartyStore_Test_OK() throws Exception{
         ThirdParty thirdParty1 = new ThirdParty("Thirdparty1","654321");
         String body = objectMapper.writeValueAsString(thirdParty);
-        MvcResult mvcResult = mockMvc.perform(post("/third-party")
-                .content(body)
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).andReturn();
+        MvcResult mvcResult = mockMvc.perform(
+                        put("/thirdparty/" + thirdParty1.getHashedKey())
+                                .content(body)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andReturn();
 
 
     }
+
 
 
 

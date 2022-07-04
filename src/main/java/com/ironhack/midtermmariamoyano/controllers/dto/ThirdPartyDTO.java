@@ -12,6 +12,13 @@ public class ThirdPartyDTO {
     @NotNull
     private BigDecimal balanceTransfer;
 
+    public ThirdPartyDTO(Long id, String name, String hashedKey, BigDecimal balanceTransfer) {
+        this.id = id;
+        this.name = name;
+        this.hashedKey = hashedKey;
+        this.balanceTransfer = balanceTransfer;
+    }
+
     public Long getId() {
         return id;
     }
