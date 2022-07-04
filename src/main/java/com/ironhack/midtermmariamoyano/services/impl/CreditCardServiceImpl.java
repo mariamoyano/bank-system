@@ -7,6 +7,7 @@ import com.ironhack.midtermmariamoyano.services.interfaces.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -14,12 +15,13 @@ public class CreditCardServiceImpl implements CreditCardService {
     @Autowired
     private CreditCardRepository creditCardRepository;
 
-    @Override
-    public void updateCreditCardBalance(Long id, Money balance) {
 
+    public void updateCreditCardBalance(Long id, int balance) {
+        Optional <CreditCard> creditCardOptional = creditCardRepository.findById(id);
+        creditCardOptional.get().setBalance(new Money(BigDecimal.valueOf(balance)));
     }
 
-    @Override
+
     public void transferMoney(String ownerName, long id) {
 
     }

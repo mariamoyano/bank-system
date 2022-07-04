@@ -78,4 +78,15 @@ public abstract class Accounts {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Accounts{" +
+                "id=" + id +
+                ", balance=" + balance +
+                ", primaryOwner=" + primaryOwner +
+                ", secondaryOwner=" + secondaryOwner +
+                ", penaltyFee=" + penaltyFee +
+                '}';
+    }
 }

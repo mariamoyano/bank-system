@@ -18,10 +18,10 @@ public class CreditCardControllerImpl {
     @Autowired
     private CreditCardService creditCardService;
 
-
-    @PutMapping("/credit-card/{balance}")
+///Cambiar el balance
+    @PatchMapping("/credit-card/{id}/balance/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateCreditCardBalance(@PathVariable long id, @RequestBody @Valid Money balance) {
+    public void updateCreditCardBalance(@PathVariable Long id, @RequestBody @Valid  int balance) {
         creditCardService.updateCreditCardBalance(id, balance);
     }
 

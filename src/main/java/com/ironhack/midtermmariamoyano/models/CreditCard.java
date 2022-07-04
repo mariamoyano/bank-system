@@ -95,5 +95,12 @@ public class CreditCard extends Accounts {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "creditLimit=" + creditLimit +
+                ", interestRate=" + interestRate +
+                ", lastUpdateDate=" + lastUpdateDate +
+                '}';
+    }
 }
