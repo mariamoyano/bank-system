@@ -62,6 +62,7 @@ CREATE TABLE accounts (
 id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 balance_amount DECIMAL,
 balance_currency VARCHAR (255),
+secret_key VARCHAR(255),
 primary_owner_id BIGINT,
 secondary_owner_id BIGINT,
 penalty_fee_amount DECIMAL,
@@ -71,7 +72,6 @@ FOREIGN KEY (secondary_owner_id) REFERENCES account_holder (id)
 );
 CREATE TABLE checking (
 id BIGINT  AUTO_INCREMENT NOT NULL PRIMARY KEY,
-secret_key VARCHAR(255),
 monthly_maintenance_Fee_amount DECIMAL,
 monthly_maintenance_Fee_currency VARCHAR (255),
 minimum_balance_amount DECIMAL,
@@ -84,7 +84,6 @@ FOREIGN KEY (account_id) REFERENCES accounts (id)
 
 CREATE TABLE student_checking (
 id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-secret_key VARCHAR (255),
 creation_date DATE,
 account_status VARCHAR(6),
 account_id BIGINT,
@@ -94,7 +93,6 @@ FOREIGN KEY (account_id) REFERENCES accounts (id)
 
 CREATE TABLE savings (
 id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-secret_key VARCHAR (255),
 minimum_balance_amount DECIMAL,
 minimum_balance_currency VARCHAR (255),
 creation_date DATE,
@@ -114,3 +112,7 @@ last_update_date DATE,
 account_id BIGINT,
 FOREIGN KEY (account_id) REFERENCES accounts (id)
 );
+
+
+
+
