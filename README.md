@@ -13,6 +13,9 @@
 
 <h2>CLASS DIAGRAM</h2>
 <img src="src/main/img/diagram.png" alt="diagram"/>
+
+<h2>MYSQL</h2>
+* See -> midterm.mysql
 <h3> Admins </h3>
 * Admins should be able to access the balance for any account and to modify it.
 <h3> AccountHolders </h3>
