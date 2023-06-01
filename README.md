@@ -1,5 +1,5 @@
 # bank-system
-<h1> Midterm project: Building a banking system </h1>
+<h1> Building a banking system </h1>
 
 
 1. The system have 4 types of accounts: StudentChecking, Checking, Savings, and CreditCard.
