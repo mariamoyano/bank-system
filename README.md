@@ -1,4 +1,4 @@
-# midterm-mariamoyano
+# bank-system
 <h1> Midterm project: Building a banking system </h1>
 
 
